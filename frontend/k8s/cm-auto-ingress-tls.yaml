@@ -1,0 +1,45 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  name: sk046-cm-tls-ingress
+  namespace: skala-practice
+spec:
+  ingressClassName: public-nginx
+  rules:
+  - host: sk046-ask-mento-tls.skala25a.project.skala-ai.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: sk046-ask-mento
+            port:
+              number: 8080
+        path: /api
+        pathType: Prefix
+      - backend:
+          service:
+            name: sk046-ask-mento
+            port:
+              number: 8081
+        path: /actuator
+        pathType: Prefix
+      - backend:
+          service:
+            name: sk046-ask-mento
+            port:
+              number: 8080
+        path: /swagger
+        pathType: Prefix
+      - backend:
+          service:
+            name: sk046-ask-mento
+            port:
+              number: 8080
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - sk046-ask-mento-tls.skala25a.project.skala-ai.com
+    secretName: sk046-cm-auto-tls-secret
