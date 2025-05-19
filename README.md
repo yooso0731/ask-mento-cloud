@@ -5,3 +5,5 @@
 
 - docker 연결 후 Ingress 설정하여 퍼블릭하게 접근 가능
 - https://sk046-ask-mento-tls.skala25a.project.skala-ai.com/
+
+ho
